@@ -1,0 +1,22 @@
+{
+    "name": "IFood",
+    "founder": 2011,
+    "companies": [
+        {
+            "name": "Sympla",
+            "founder": 2011
+        },
+        {
+            "name": "Zoop",
+            "founder": 2013
+        },
+        {
+            "name": "MovilePay",
+            "founder": 1999
+        },
+        {
+            "name": "Moova",
+            "founder": 2019
+        }
+    ]
+}
