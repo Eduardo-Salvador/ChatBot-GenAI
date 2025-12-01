@@ -1,9 +1,14 @@
-ConsumingAPI-Climate\ClimateAPI\.env
-
+venv/
+.venv/
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
 *.env
+.env
 *.log
+.vscode/
+.DS_Store
+Thumbs.db
+TestingJSON/
+ConsumingAPI-Climate/

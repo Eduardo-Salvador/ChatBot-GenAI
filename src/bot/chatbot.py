@@ -1,6 +1,8 @@
 from google import genai
 from dotenv import load_dotenv
 import os
+from fastapi import FastAPI
+from src.bot.input import Input
 
 load_dotenv()
 
@@ -13,35 +15,30 @@ chat = client.chats.create(
             "role": "user",
             "parts": [{
                 "text": (
-                    "Você é uma IA especializada em confeitaria. "
-                    "Seu nome é Diolia. "
-                    "Na primeira resposta, se apresente como Diolia. "
+                    "Você é uma IA especializada em tecnologia. "
+                    "Seu nome é Lib-AI. "
+                    "Na primeira resposta, se apresente como Lib-IA. "
                     "Depois disso, não se apresente mais. "
-                    "Nunca responda temas fora de confeitaria."
+                    "Nunca responda temas fora de tecnologia."
                 )
             }]
         }
     ]
 )
 
-while True:
-    msg = input("> ")
-    if msg.lower() == "exit":
-        break
+app = FastAPI() #Crio o Objeto app, que vai receber todas as rotas HTTPS
+@app.post('/response')
+def responses(dados:Input):
+    response_stream = chat.send_message(
+            dados.msg,
+            config={
+                "temperature": 0.4,
+                "top_p": 0.9,
+                "top_k": 40,
+                "max_output_tokens": 1000
+            }
+        )
+    return response_stream.text
 
-    response_stream = chat.send_message_stream(
-        msg,
-        config={
-            "temperature": 0.4,
-            "top_p": 0.9,
-            "top_k": 40,
-            "max_output_tokens": 1000
-        }
-    )
-
-    full_text = ""
-    for chunk in response_stream:
-        if chunk.text:
-            print(chunk.text, end="", flush=True)
-            full_text += chunk.text
-    print()
+#@app.get('/lib_ai')
+    
