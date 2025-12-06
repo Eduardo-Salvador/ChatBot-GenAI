@@ -1,13 +1,8 @@
-"""
-Rotas FastAPI / Flask / Django
+from fastapi import FastAPI
+from ..model.input import Input
+from ..core.processor import process_message
 
-Esquemas de entrada e saída
-
-Chamadas para o processor
-
-Formatação de resposta HTTP
-
-Não coloque regras de negócio.
-Não coloque chamada para Gemini direto.
-"""
-
+app = FastAPI(title="Lib-AI")
+@app.post('/response')
+def responses(dados:Input) -> str:
+    return process_message(dados)

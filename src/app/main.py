@@ -1,11 +1,7 @@
-"""
-Deve conter apenas:
+from fastapi import FastAPI
+from src.api.chatbot import app
+import src.utils.logger   
+import uvicorn
 
-Inicialização do app
-
-Iniciar FastAPI / Flask
-
-Registrar rotas
-
-Rodar servidor
-"""
+if __name__ == "__main__":
+    uvicorn.run("src.app.main:app", host="127.0.0.1", port=8000, reload=True)

@@ -3,22 +3,6 @@ from dotenv import load_dotenv
 from .config import *
 import os
 
-"""
-Criação do cliente Gemini
-
-Função para enviar mensagens cruas para o modelo
-
-Tratamento de exceptions
-
-Configuração da personalidade da IA (persua)
-
-Lidar com o histórico se for no client
-Isso faz sentido porque:
-
-Esse módulo é de integração externa.
-É onde você cria e controla o acesso à API do Gemini.
-"""
-
 load_dotenv()
 
 client = genai.Client(api_key=os.getenv(GEMINI_API_KEY))
@@ -30,7 +14,8 @@ chat = client.chats.create(
             "role": "user",
             "parts": [{
                 "text": (
-                    "Você é uma IA especializada em tecnologia. "
+                    "Você é uma IA especializada em tecnologia, sua função é simplificar documentações de linguagens, frameworks e projetos de GitHub. "
+                    "Você irá pegar o input da documentação ou projeto e vai fazer uma simplificação na resposta, usando analogias faceis para quem não entendeu ou nunca viu aquela documentação."
                     "Seu nome é Lib-AI. "
                     "Na primeira resposta, se apresente como Lib-IA. "
                     "Depois disso, não se apresente mais."
