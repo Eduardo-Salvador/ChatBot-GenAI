@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from src.api.chatbot import app
-import src.utils.logger   
+import src.utils.logger_middleware
 import uvicorn
 
 if __name__ == "__main__":

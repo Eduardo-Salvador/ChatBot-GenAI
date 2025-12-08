@@ -1,16 +1,20 @@
-from .gemini_client import chat
+from .gemini_client import client
 from ..model.input import Input
 from .config import *
 
-def process_message(dados: Input) -> str:
-    """
-    :param dados: Description
-    :type dados: Input
-    :return: Description
-    :rtype: str
-    """
-    response = chat.send_message(
-        dados.msg,
+def process_message(dados: Input):
+    messages = [
+        {
+            "role": "user",
+            "parts": [{"text": PERSUA}]
+        }
+    ]
+
+    messages.append({"role": "user", "parts": [{"text": dados.msg}]})
+
+    stream = client.models.generate_content_stream(
+        model=MODEL_NAME,
+        contents=messages,
         config={
             "temperature": DEFAULT_TEMPERATURE,
             "top_p": DEFAULT_TOKENS_PERCENTAGE,
@@ -18,4 +22,8 @@ def process_message(dados: Input) -> str:
             "max_output_tokens": DEFAULT_OUTPUT_TOKENS
         }
     )
-    return response.text
+    for chunk in stream:
+        if chunk.text:
+            yield chunk.text
+
+    messages.append({"role": "model", "parts": [{"text": chunk.text}]})

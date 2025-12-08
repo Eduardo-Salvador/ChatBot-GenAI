@@ -3,6 +3,7 @@ from fastapi import Request
 from ..api.chatbot import app
 from sys import stderr
 from loguru import logger
+import time
 
 logger.remove()
 logger.add(
@@ -13,6 +14,8 @@ logger.add(
 
 @app.middleware("http")
 async def log_requests(request:Request, call_next):
+    start = time.time()
+
     raw = await request.body()
     data = json.loads(raw.decode())
     msg = data.get("msg")
@@ -20,6 +23,8 @@ async def log_requests(request:Request, call_next):
     logger.info(f"REQUEST: {msg}")
 
     response = await call_next(request)
+
+    process_time = (time.time() - start) * 1000  
     
-    logger.info(f"RESPONSE: {response.status_code}")
+    logger.info(f"RESPONSE: {response.status_code} | {process_time:.2f}ms")
     return response
