@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from ..model.input import Input
-from ..core.processor import process_message
+from ..dto.requests.chat_request import Input
+from ...services.chat_service import process_message
 from fastapi.responses import StreamingResponse
 
 app = FastAPI(title="Lib-AI")

@@ -1,6 +1,7 @@
-from .gemini_client import client
-from ..model.input import Input
-from .config import *
+from ..infra.llm.gemini_client import client
+from ..api.dto.requests.chat_request import Input
+from ..core.config.settings import *
+from ..core.constants.models import MODEL_NAME
 
 def process_message(dados: Input):
     messages = [

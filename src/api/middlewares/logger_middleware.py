@@ -1,6 +1,6 @@
 import json
 from fastapi import Request
-from ..api.chatbot import app
+from ..routes.chat_routes import app
 from sys import stderr
 from loguru import logger
 import time
