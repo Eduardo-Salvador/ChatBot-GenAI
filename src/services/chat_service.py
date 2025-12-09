@@ -1,13 +1,13 @@
 from ..infra.llm.gemini_client import client
 from ..api.dto.requests.chat_request import Input
-from ..core.config.settings import *
-from ..core.constants.models import MODEL_NAME
+from ..core.config.deppendencies import *
+from ..core.config.settings import GEMINI_API_KEY, MODEL_NAME, SYSTEM_PROMPT 
 
 def process_message(dados: Input):
     messages = [
         {
             "role": "user",
-            "parts": [{"text": PERSUA}]
+            "parts": [{"text": SYSTEM_PROMPT}]
         }
     ]
 

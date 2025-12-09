@@ -1,6 +1,6 @@
 from google import genai
 from dotenv import load_dotenv
-from ...core.config.settings import *
+from ...core.config.deppendencies import *
 import os
 
 load_dotenv()
